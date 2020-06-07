@@ -25,7 +25,7 @@ class Image extends Model
     /* RELACION DE UNO A MUCHOS */
     //Una imagen puede tener muchos comentarios
     public function comments(){
-        return $this->hasMany("App\Comment");
+        return $this->hasMany("App\Comment")->orderBy('created_at', 'ASC');
     }
 
     //Una imagen puede tener muchos likes
