@@ -15,4 +15,15 @@ class Comment extends Model
         "imagen_id",
         "content"
     ];
+
+    /* RELACION DE MUCHOS A UNO */
+    //Un comentario solo pertenece a un usuario
+    public function user(){
+        return $this->belongsTo("App\User", "user_id");
+    }
+    
+    //Un comentario solo pertenece a una imagen
+    public function image(){
+        return $this->belongsTo("App\Image", "image_id");
+    }
 }

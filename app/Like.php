@@ -14,4 +14,15 @@ class Like extends Model
         "user_id",
         "image_id"        
     ];
+
+    /* RELACION DE MUCHOS A UNO */
+    //Un like solo pertenece a un usuario
+    public function user(){
+        return $this->belongsTo("App\User", "user_id");
+    }
+    
+    //Un like solo pertenece a una imagen
+    public function image(){
+        return $this->belongsTo("App\Image", "image_id");
+    }
 }
