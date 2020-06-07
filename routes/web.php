@@ -16,8 +16,12 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
+/* Ruta por defecto */
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
