@@ -24,11 +24,15 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+/* Rutas */
+
+
+/* Rutas de la autenticación */
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-/* Pruebas */
+/* Ruta para pruebas */
 Route::get('/test', function(){
     /* Images */
     $dataImage  = App\Image::all();
