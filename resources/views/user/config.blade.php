@@ -4,6 +4,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            @if( session('mensaje') )
+                <div class="alert alert-success">{{ session('mensaje') }}</div>
+            @endif
+
             <div class="card">
                 <div class="card-header">Configuración de mi cuenta</div>
 
