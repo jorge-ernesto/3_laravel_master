@@ -40,10 +40,17 @@ class UserController extends Controller
         $nick    = $request->input('nick');
         $email   = $request->input('email'); 
         
-        echo $id;
-        echo "<pre>";        
-        print_r($request->all());
-        echo "</pre>";
-        return;
+        // echo $id;
+        // echo "<pre>";        
+        // print_r($request->all());
+        // echo "</pre>";
+        // return;
+
+        $validate = $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
+            'nick' => ['required', 'string', 'max:255', 'unique:users,nick,'.$id],           //El nick sera unico, pero puede haber una excepción que el nick coincide con el nick del id actual
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$id] //El email sera unico, pero puede haber una excepción que el email coincide con el email del id actual            
+        ]);        
     }
 }
