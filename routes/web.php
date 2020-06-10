@@ -25,7 +25,9 @@ Route::get('/', function () {
 });
 
 /* Rutas */
-
+//User
+Route::get('/config', 'UserController@config')->name('config.index');
+Route::post('/config', 'UserController@update')->name('config.update');
 
 /* Rutas de la autenticación */
 Auth::routes();
