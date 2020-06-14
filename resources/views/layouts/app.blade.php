@@ -56,6 +56,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="">Subir imagen</a>
                             </li>
+                            @if(Auth::user()->image)    
+                                <img src="{{ route('user.avatar', Auth::user()->image) }}" alt="" width="40px">
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
