@@ -83,7 +83,7 @@
                                 @endif
                                 
                                 <div class="custom-file">                                    
-                                    <input id="customFileLang" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ Auth::user()->image }}" autocomplete="image" lang="es">
+                                    <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="customFileLang" name="image" lang="es">
                                     <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
                                 </div>
 
