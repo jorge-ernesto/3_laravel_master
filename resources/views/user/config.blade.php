@@ -77,7 +77,11 @@
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
 
-                            <div class="col-md-6">                                
+                            <div class="col-md-6">  
+                                @if(Auth::user()->image)    
+                                    <img src="{{ route('user.avatar', Auth::user()->image) }}" alt="" class="avatar">
+                                @endif
+                                
                                 <div class="custom-file">                                    
                                     <input id="customFileLang" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ Auth::user()->image }}" autocomplete="image" lang="es">
                                     <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>

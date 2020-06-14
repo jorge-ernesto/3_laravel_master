@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App; //Recuperando modelos, App es el namespace
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 
 class UserController extends Controller
 {    
@@ -67,20 +69,21 @@ class UserController extends Controller
 
         /* Subimos imagen */
         $image = $request->file('image');
-        if($image){
-            //Poner nombre unico
-            $image_path = time()."_".$image->getClientOriginalName();
-
-            //Guardar en la carpeta storage/app/users
-            Storage::disk('disk_users')->put($image_path, File::get($image));
-
-            //Seteo el nombre de la imagen en el objeto
-            $user->image = $image_path;
+        if($image){ //Solo si hay imagen
+            $image_path = time()."_".$image->getClientOriginalName(); //Poner nombre unico
+            Storage::disk('disk_users')->put($image_path, File::get($image)); //Guardar en la carpeta storage/app/users
+            $user->image = $image_path; //Seteo el nombre de la imagen en el objeto
         }
 
         $user->update();
 
         return redirect()->route('config.index')
                          ->with('mensaje', 'Usuario actualizado correctamente');
+    }
+
+    public function getImage($filename){
+        $file = Storage::disk('disk_users')->get($filename);
+        $response = Response::make($file, 200);
+        return $response;
     }
 }

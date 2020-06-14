@@ -28,6 +28,7 @@ Route::get('/', function () {
 //User
 Route::get('/config', 'UserController@config')->name('config.index');
 Route::post('/config', 'UserController@update')->name('config.update');
+Route::get('/user/avatar/{filename}', 'UserController@getImage')->name('user.avatar');
 
 /* Rutas de la autenticación */
 Auth::routes();
