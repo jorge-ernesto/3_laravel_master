@@ -19,6 +19,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
+    <!-- Personalizado -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -57,7 +60,7 @@
                                 <a class="nav-link" href="">Subir imagen</a>
                             </li>
                             @if(Auth::user()->image)    
-                                <img src="{{ route('user.avatar', Auth::user()->image) }}" alt="" width="40px">
+                                <img class="rounded-circle" src="{{ route('user.avatar', Auth::user()->image) }}" alt="" width="40px">
                             @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
