@@ -21,7 +21,13 @@ use Illuminate\Support\Facades\DB;
 //     return view('welcome');
 // });
 Route::get('/', function () {
-    return view('auth.login');
+    $auth = \Auth::user();
+    if( !isset($auth) ){
+        return view('auth.login');                
+    }else{
+        return view('home');
+    }
+    
 });
 
 /* Rutas */

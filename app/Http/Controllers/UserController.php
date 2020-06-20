@@ -95,7 +95,7 @@ class UserController extends Controller
         }
 
         $user->update();
-
+        
         return redirect()->route('config.index')
                          ->with('mensaje', 'Usuario actualizado correctamente');
     }
