@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App; //Recuperando modelos, App es el namespace
-
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -66,7 +64,7 @@ class UserController extends Controller
         ]);
         
         /* Asignar nuevos valores al objeto de usuario */
-        $user = App\User::findOrFail($id);
+        $user = \App\User::findOrFail($id);
         $user->name    = $name;
         $user->surname = $surname;
         $user->nick    = $nick;
@@ -105,7 +103,9 @@ class UserController extends Controller
         // $response = Response::make($file, 200);        
         // return $response;                
         
+        // echo "<pre>";
         // echo Storage::disk('disk_users')->path($filename);
+        // echo "</pre>";        
         // echo "<pre>";
         // echo Storage::disk('disk_users')->download($filename);
         // echo "</pre>";        

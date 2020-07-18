@@ -27,7 +27,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/image') }}">
                     Instagram
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -54,13 +54,15 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="">Inicio</a>                                
+                                <a class="nav-link" href="{{ route('image.index') }}">Inicio</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">Subir imagen</a>
+                                <a class="nav-link" href="{{ route('image.create') }}">Subir imagen</a>
                             </li>
-                            @if(Auth::user()->image)    
-                                <img class="rounded-circle" src="{{ route('user.avatar', Auth::user()->image) }}" alt="" width="40px">
+                            @if(Auth::user()->image)   
+                                <a href="{{ route('config.index') }}" class="my-auto">
+                                    <img class="rounded-circle" src="{{ route('user.avatar', Auth::user()->image) }}" alt="" width="23px">
+                                </a>
                             @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
