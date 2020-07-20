@@ -22,12 +22,12 @@ use Illuminate\Support\Facades\DB;
 // });
 Route::get('/', function () {
     $auth = \Auth::user();
-    if( !isset($auth) ){
-        return view('auth.login');                
-    }else{
+
+    if( isset($auth) ){
         return view('home');
+    }else{
+        return view('auth.login');
     }
-    
 });
 
 /* Rutas */
