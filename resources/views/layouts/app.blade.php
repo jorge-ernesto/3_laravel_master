@@ -61,7 +61,7 @@
                             </li>
                             @if(Auth::user()->image)   
                                 <a href="{{ route('config.index') }}" class="my-auto">
-                                    <img class="rounded-circle" src="{{ route('user.avatar', Auth::user()->image) }}" alt="" width="23px">
+                                    <img class="rounded-circle" src="{{ route('user.avatar', Auth::user()->image) }}" alt="" width="25px">
                                 </a>
                             @endif
                             <li class="nav-item dropdown">

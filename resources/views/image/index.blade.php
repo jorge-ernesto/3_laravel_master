@@ -11,27 +11,37 @@
                 <div class="alert alert-success">{{ session('mensaje') }}</div>
             @endif
             
-            @foreach ($dataImages as $image)
-                {{-- @if( $Image->validarImagen($image->image_path) ) <!-- Valida que imagen del post exista --> --}}
-                    <div class="card" style="margin-bottom: 60px;">
-                        <div class="card-header">
-                            @if ($image->user->image) <!-- Valida que imagen del usuario exista -->
-                                <a href="#" class="mr-2">
-                                    <img class="rounded-circle" src="{{ route('user.avatar', $image->user->image) }}" alt="" width="33px">
-                                </a>
-                                {{$image->user->name.' '.$image->user->surname}} <span class="text-muted">{{' @'.$image->user->nick}}</span>
-                            @endif
-                        </div>
-
-                        <div class="card-body p-0">
-                            <img src="{{ route('image.view', $image->image_path) }}" alt="" width="100%">
-                        </div>
-
-                        <div class="p-2">
-                            {{$image->description}}
-                        </div>
+            @foreach ($dataImages as $image)                
+                <div class="card mb-5">
+                    <div class="card-header">
+                        @if ($image->user->image) <!-- Valida que imagen del usuario exista -->
+                            <a href="#" class="mr-2">
+                                <img class="rounded-circle" src="{{ route('user.avatar', $image->user->image) }}" alt="" width="30px">
+                            </a>
+                            {{$image->user->name.' '.$image->user->surname}} <span class="text-muted">{{' @'.$image->user->nick}}</span>
+                        @endif
                     </div>
-                {{-- @endif --}}
+
+                    <div class="card-body p-0">
+                        <img src="{{ route('image.view', $image->image_path) }}" alt="" width="100%">
+                    </div>
+
+                    <div class="card-footer bg-transparent">                        
+                        <!-- Usuario y descripcion -->
+                        <span class="text-muted">{{' @'.$image->user->nick}}</span><br> 
+                        {{$image->description}}<br>                        
+
+                        <!-- Likes y comentarios -->
+                        <div class="pt-4 my-auto">                
+                            <a href="#" class="mr-2" style="color:#000; text-decoration:none;">
+                                <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-heart" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                </svg>
+                            </a>                           
+                            <button class="btn btn-warning">Comentarios ({{count($image->comments)}})</button>                            
+                        </div>
+                    </div>                    
+                </div>                
             @endforeach
 
             {{$dataImages->links()}}
@@ -41,7 +51,7 @@
         <div class="col-md-3">
             @if(Auth::user()->image)   
                 <a href="#" class="mr-2">
-                    <img class="rounded-circle" src="{{ route('user.avatar', Auth::user()->image) }}" alt="" width="53px">
+                    <img class="rounded-circle" src="{{ route('user.avatar', Auth::user()->image) }}" alt="" width="50px">
                 </a>
                 {{Auth::user()->name.' '.Auth::user()->surname}} <span class="text-muted">{{' @'.Auth::user()->nick}}</span>
             @endif
