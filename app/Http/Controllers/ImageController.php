@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
 class ImageController extends Controller
 {
     public function __construct(){
@@ -27,7 +31,7 @@ class ImageController extends Controller
         // return;        
 
         /* Recogemos datos del formulario */
-        $id           = \Auth::user()->id;
+        $id           = Auth::user()->id;
         $image        = $request->file('image');
         $description  = $request->input('description');
 
@@ -46,7 +50,7 @@ class ImageController extends Controller
         $image = $request->file('image');
         if($image){ //Solo si hay imagen
             $image_path = time()."_".$image->getClientOriginalName(); //Poner nombre unico
-            \Storage::disk('disk_images')->put($image_path, \File::get($image)); //Guardar en la carpeta storage/app/users
+            Storage::disk('disk_images')->put($image_path, \File::get($image)); //Guardar en la carpeta storage/app/users
             $user->image_path = $image_path; //Seteo el nombre de la imagen en el objeto
         }
 
@@ -57,11 +61,11 @@ class ImageController extends Controller
     }
 
     public function getImage($filename){       
-        return \Storage::disk('disk_images')->download($filename);
+        return Storage::disk('disk_images')->download($filename);
     }
 
-    public function detail($id){
-        $image = \App\Image::findOrFail($id);
+    public function show($id){
+        $image = App\Image::findOrFail($id);
         return view('image.detail', compact('image'));
     }
 }

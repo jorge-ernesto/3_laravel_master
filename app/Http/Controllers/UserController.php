@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {    
@@ -25,7 +27,7 @@ class UserController extends Controller
         // return;
 
         /* Recogemos datos del formulario */
-        $id      = \Auth::user()->id;
+        $id      = Auth::user()->id;
         $name    = $request->input('name');
         $surname = $request->input('surname');
         $nick    = $request->input('nick');
@@ -41,7 +43,7 @@ class UserController extends Controller
         ]);
         
         /* Asignar nuevos valores al objeto de usuario */
-        $user = \App\User::findOrFail($id);
+        $user = App\User::findOrFail($id);
         $user->name    = $name;
         $user->surname = $surname;
         $user->nick    = $nick;
@@ -76,19 +78,6 @@ class UserController extends Controller
     }
 
     public function getImage($filename){
-        // $file = Storage::disk('disk_users')->get($filename);
-        // $response = Response::make($file, 200);        
-        // return $response;                
-        
-        // echo "<pre>";
-        // echo Storage::disk('disk_users')->path($filename);
-        // echo "</pre>";        
-        // echo "<pre>";
-        // echo Storage::disk('disk_users')->download($filename);
-        // echo "</pre>";
-        // echo "<pre>";
-        // echo \Storage::disk('disk_images')->exists($filename);
-        // echo "</pre>";
         return Storage::disk('disk_users')->download($filename);
     }
 }
