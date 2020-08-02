@@ -11,7 +11,6 @@
 
             <div class="card">
                 <div class="card-header">Configuración de mi cuenta</div>
-
                 <div class="card-body">
                     <form method="POST" action="{{ route('config.update') }}" enctype="multipart/form-data">
                         @csrf
@@ -22,14 +21,7 @@
                             <div class="col-md-6">  
                                 @if(Auth::user()->image)    
                                     <img src="{{ route('user.avatar', Auth::user()->image) }}" alt="" class="rounded-circle" width="120px">
-                                @endif
-                                
-                                {{-- 
-                                <div class="custom-file">                                    
-                                    <input type="file" class="custom-file-input" id="image" name="image" lang="es">
-                                    <label class="custom-file-label" for="image">Seleccionar Archivo</label>
-                                </div>
-                                --}}
+                                @endif                                                            
                             </div>
                         </div>
 
@@ -46,8 +38,7 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <!-- Modificamos register -->                    
+                        
                         <div class="form-group row">
                             <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Surname') }}</label>
 
@@ -75,7 +66,6 @@
                                 @enderror
                             </div>
                         </div>
-                        <!-- Fin Modificamos register -->
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -89,7 +79,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div> 
+                        </div>                         
                         
                         <!-- Input file donde se adjunta la imagen -->
                         <div class="form-group row">

@@ -6,29 +6,6 @@ use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
-    /*
-    public function index(){
-    }
-
-    public function create(){
-    }
-
-    public function store(Request $request){
-    }
-
-    public function show($id){
-    }
-
-    public function edit($id){
-    }
-
-    public function update(Request $request, $id){
-    }
-
-    public function destroy($id){
-    }
-    */
-
     public function __construct(){
         $this->middleware('auth');
     } 
@@ -36,7 +13,6 @@ class ImageController extends Controller
     public function index(){
         $dataImages = \App\Image::orderBy('id', 'DESC')
                                 ->paginate(5);
-            
         return view('image.index', compact('dataImages'));
     }
 
@@ -84,8 +60,8 @@ class ImageController extends Controller
         return \Storage::disk('disk_images')->download($filename);
     }
 
-    public function validarImagen($filename){
-        $validar = \Storage::disk('disk_images')->exists($filename);
-        return $validar;
+    public function detail($id){
+        $image = \App\Image::findOrFail($id);
+        return view('image.detail', compact('image'));
     }
 }

@@ -10,29 +10,6 @@ use Illuminate\Support\Facades\Response;
 
 class UserController extends Controller
 {    
-    /*
-    public function index(){
-    }
-
-    public function create(){
-    }
-
-    public function store(Request $request){
-    }
-
-    public function show($id){
-    }
-
-    public function edit($id){
-    }
-
-    public function update(Request $request, $id){
-    }
-
-    public function destroy($id){
-    }
-    */
-
     public function __construct(){
         $this->middleware('auth');
     }
@@ -108,7 +85,10 @@ class UserController extends Controller
         // echo "</pre>";        
         // echo "<pre>";
         // echo Storage::disk('disk_users')->download($filename);
-        // echo "</pre>";        
+        // echo "</pre>";
+        // echo "<pre>";
+        // echo \Storage::disk('disk_images')->exists($filename);
+        // echo "</pre>";
         return Storage::disk('disk_users')->download($filename);
     }
 }

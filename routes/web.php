@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Image;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\DB;
 //     return view('welcome');
 // });
 Route::get('/', function () {
-    $auth = \Auth::user();
+    $auth = Auth::user();
 
     if( isset($auth) ){
         return view('home');
