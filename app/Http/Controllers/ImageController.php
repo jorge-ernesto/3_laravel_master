@@ -15,9 +15,9 @@ class ImageController extends Controller
     } 
 
     public function index(){
-        $dataImages = \App\Image::orderBy('id', 'DESC')
+        $dataImagen = \App\Image::orderBy('id', 'DESC')
                                 ->paginate(5);
-        return view('image.index', compact('dataImages'));
+        return view('image.index', compact('dataImagen'));
     }
 
     public function create(){
@@ -25,47 +25,43 @@ class ImageController extends Controller
     }
 
     public function store(Request $request){
-        // echo "<pre>";
-        // print_r($request->all());
-        // echo "</pre>";
-        // return;        
+        $user_id = Auth::user()->id;  
 
-        /* Recogemos datos del formulario */
-        $id           = Auth::user()->id;
-        $image        = $request->file('image');
-        $description  = $request->input('description');
+        /* Obtenemos todo el request */
+        // return $request->all();                               
 
         /* Validacion del formulario */
         $validate = $this->validate($request, [
             'image'       => 'required|mimes:jpg,jpeg,png,gif',
             'description' => 'required|string|max:255'
-        ]);
+        ]);        
 
         /* Asignar nuevos valores al objeto de usuario */
-        $user              = New \App\Image;
-        $user->user_id     = $id;
-        $user->description = $description;
-
+        $imagenNueva              = new App\Image;
+        $imagenNueva->user_id     = $user_id;
+        $imagenNueva->description = $request->description;
+       
         /* Subimos imagen */
-        $image = $request->file('image');
-        if($image){ //Solo si hay imagen
-            $image_path = time()."_".$image->getClientOriginalName(); //Poner nombre unico
+        $image = $request->image;      
+        if($image){                                                             //Solo si hay imagen
+            $image_path = time()."_".$image->getClientOriginalName();           //Poner nombre unico
             Storage::disk('disk_images')->put($image_path, \File::get($image)); //Guardar en la carpeta storage/app/users
-            $user->image_path = $image_path; //Seteo el nombre de la imagen en el objeto
-        }
+            $imagenNueva->image = $image_path;                                  //Seteo el nombre de la imagen en el objeto
+        }                        
 
-        $user->save();
-        
-        return redirect()->route('image.index')
-                         ->with('mensaje', 'Imagen subida correctamente');
-    }
-
-    public function getImage($filename){       
-        return Storage::disk('disk_images')->download($filename);
-    }
+        $imagenNueva->save();        
+        return redirect()->route('image.index')->with('mensaje', 'Imagen subida correctamente');
+    }    
 
     public function show($id){
-        $image = App\Image::findOrFail($id);
-        return view('image.detail', compact('image'));
+        $dataImagen = App\Image::findOrFail($id);
+        return view('image.detail', compact('dataImagen'));
+    }
+
+    /**
+     * Funcion para descargar imagenes
+     */
+    public function getImage($filename){       
+        return Storage::disk('disk_images')->download($filename);
     }
 }
