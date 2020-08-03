@@ -1,3 +1,5 @@
+@inject('FormatTime', 'App\Helpers\FormatTime')
+
 @extends('layouts.app')
 
 @section('content')
@@ -23,7 +25,7 @@
 
                 <div class="card-footer bg-transparent">                        
                     <!-- Fecha y usuario -->
-                    <span class="text-muted">{{ $image->created_at.' @'.$image->user->nick }}</span><br> 
+                    <span class="text-muted">{{ ' @'.$image->user->nick.' '.$FormatTime->LongTimeFilter($image->created_at) }}</span><br> 
 
                     <!-- Descripcion -->
                     {{ $image->description }}<br>                        
