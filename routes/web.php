@@ -33,14 +33,15 @@ Route::get('/', function () {
 
 /* Rutas */
 //User
-Route::get('/config', 'UserController@config')->name('config.index');
-Route::post('/config', 'UserController@update')->name('config.update');
-Route::get('/user/avatar/{filename}', 'UserController@getImage')->name('user.avatar'); //Trae imagen
+Route::get('/config'              , 'UserController@config')  ->name('config.index');
+Route::post('/config'             , 'UserController@update')  ->name('config.update');
+Route::get('/user/view/{filename}', 'UserController@getImage')->name('user.view'); //Trae imagen
 
 //Image
-Route::get('/image', 'ImageController@index')->name('image.index');
-Route::get('/image/create', 'ImageController@create')->name('image.create');
-Route::post('/image', 'ImageController@store')->name('image.store');
+Route::get('/image'                , 'ImageController@index')   ->name('image.index');
+Route::get('/image/create'         , 'ImageController@create')  ->name('image.create');
+Route::post('/image'               , 'ImageController@store')   ->name('image.store');
+Route::get('/image/{image}'        , 'ImageController@detail')  ->name('image.detail');
 Route::get('/image/view/{filename}', 'ImageController@getImage')->name('image.view'); //Trae imagen
 
 /* Rutas de la autenticación */

@@ -53,9 +53,9 @@ class ImageController extends Controller
         return redirect()->route('image.index')->with('mensaje', 'Imagen subida correctamente');
     }    
 
-    public function show($id){
-        $dataImagen = App\Image::findOrFail($id);
-        return view('image.detail', compact('dataImagen'));
+    public function detail($id){
+        $image = App\Image::findOrFail($id);
+        return view('image.detail', compact('image'));
     }
 
     /**

@@ -20,7 +20,7 @@
 
                             <div class="col-md-6">  
                                 @if(Auth::user()->image)    
-                                    <img src="{{ route('user.avatar', Auth::user()->image) }}" alt="" class="rounded-circle" width="120px">
+                                    <img src="{{ route('user.view', Auth::user()->image) }}" alt="" class="rounded-circle" width="120px">
                                 @endif                                                            
                             </div>
                         </div>
