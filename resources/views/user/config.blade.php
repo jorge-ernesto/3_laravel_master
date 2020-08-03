@@ -87,9 +87,16 @@
                             
                             <div class="col-md-6">  
                                 <div class="custom-file">                                    
-                                    <input type="file" class="custom-file-input" id="image" name="image" lang="es">
+                                    <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="image" name="image" lang="es">
                                     <label class="custom-file-label" for="image">Seleccionar Archivo</label>
-                                </div>                                                                        
+                                </div>    
+                                
+                                {{-- Esto no funciona con la clase 'invalid-feedback' por el tipo nuevo de custom file input, se puede arreglar usando estilos css --}}
+                                @error('image')
+                                    <span style="width: 100%; margin-top: 0.25rem; font-size: 80%; color: #e3342f;" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>                                
                         </div>
 

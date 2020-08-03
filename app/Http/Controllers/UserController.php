@@ -30,8 +30,9 @@ class UserController extends Controller
         $validate = $this->validate($request, [
             'name'    => "required|string|max:255",
             'surname' => "required|string|max:255",
-            'nick'    => "required|string|max:255|unique:users,nick,".$id,       //El nick sera unico, pero puede haber una excepción que el nick coincide con el nick del id actual
-            'email'   => "required|string|email|max:255|unique:users,email,".$id //El email sera unico, pero puede haber una excepción que el email coincide con el email del id actual                        
+            'nick'    => "required|string|max:255|unique:users,nick,".$id,        //El nick sera unico, pero puede haber una excepción que el nick coincide con el nick del id actual
+            'email'   => "required|string|email|max:255|unique:users,email,".$id, //El email sera unico, pero puede haber una excepción que el email coincide con el email del id actual                        
+            'image'   => "mimes:jpg,jpeg,png,gif"
         ]);        
         
         /* Asignar nuevos valores al objeto de usuario */

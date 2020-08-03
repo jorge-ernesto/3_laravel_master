@@ -45,7 +45,7 @@
                             <a href="{{ route('image.detail', $image->id) }}" class="btn btn-warning">Comentarios ({{ count($image->comments) }})</a>
                         </div>
                     </div>                    
-                </div>                
+                </div>
             @endforeach
 
             {{ $dataImagen->links() }}

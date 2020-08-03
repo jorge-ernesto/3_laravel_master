@@ -25,9 +25,9 @@
                                     <label class="custom-file-label" for="image">Seleccionar Archivo</label>
                                 </div>
 
-                                {{-- Esto no funciona por el tipo nuevo de custom file input, se puede arreglar con estilos css --}}
+                                {{-- Esto no funciona con la clase 'invalid-feedback' por el tipo nuevo de custom file input, se puede arreglar usando estilos css --}}
                                 @if( $errors->has('image') )
-                                    <span class="invalid-feedback" role="alert">
+                                    <span style="width: 100%; margin-top: 0.25rem; font-size: 80%; color: #e3342f;" role="alert">
                                         <strong>{{ $errors->first('image') }}</strong>
                                     </span>
                                 @endif
