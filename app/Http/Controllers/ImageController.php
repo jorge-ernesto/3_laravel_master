@@ -51,7 +51,8 @@ class ImageController extends Controller
     }    
 
     public function show($id){
-        $dataComment = App\Comment::orderBy('id', 'DESC')
+        $dataComment = App\Comment::where('image_id', '=', $id)
+                                    ->orderBy('id', 'DESC')
                                     ->paginate(20);
         $image = App\Image::findOrFail($id);
         return view('image.show', compact('dataComment', 'image'));
@@ -62,5 +63,8 @@ class ImageController extends Controller
      */
     public function getImage($filename){       
         return Storage::disk('disk_images')->download($filename);
+        
+        // $file = Storage::disk('disk_images')->get($filename);
+        // return $file;
     }
 }

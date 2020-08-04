@@ -62,5 +62,8 @@ class UserController extends Controller
      */
     public function getImage($filename){
         return Storage::disk('disk_users')->download($filename);
+
+        // $file = Storage::disk('disk_users')->get($filename);
+        // return $file;
     }
 }
