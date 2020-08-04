@@ -36,9 +36,7 @@ class ImageController extends Controller
 
         /* Asignar nuevos valores al objeto de usuario */
         $imagenNueva              = new App\Image;
-        $imagenNueva->user_id     = Auth::user()->id;
-        $imagenNueva->description = $request->description;
-
+        $imagenNueva->user_id     = Auth::user()->id; 
         /* Subimos imagen */
         $image = $request->image;      
         if($image):                                                             //Solo si hay imagen
@@ -46,14 +44,17 @@ class ImageController extends Controller
             Storage::disk('disk_images')->put($image_path, \File::get($image)); //Guardar en la carpeta storage/app/users
             $imagenNueva->image = $image_path;                                  //Seteo el nombre de la imagen en el objeto
         endif;
-
+        /* Fin Subimos imagen */
+        $imagenNueva->description = $request->description;
         $imagenNueva->save();        
         return redirect()->route('image.index')->with('mensaje', 'Imagen subida correctamente');
     }    
 
     public function show($id){
+        $dataComment = App\Comment::orderBy('id', 'DESC')
+                                    ->get();
         $image = App\Image::findOrFail($id);
-        return view('image.show', compact('image'));
+        return view('image.show', compact('dataComment', 'image'));
     }
 
     /**

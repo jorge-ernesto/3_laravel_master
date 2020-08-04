@@ -29,11 +29,11 @@
                     </div>
 
                     <div class="card-footer bg-transparent">                        
-                        <!-- Fecha y usuario -->
-                        <span class="text-muted">{{ ' @'.$image->user->nick.' '.$FormatTime->LongTimeFilter($image->created_at) }}</span><br> 
+                        <!-- Usuario y fecha -->
+                        <span class="text-muted">{{ ' @'.$image->user->nick.' '.$FormatTime->LongTimeFilter($image->created_at) }}</span><br>
 
                         <!-- Descripcion -->
-                        {{ $image->description }}<br>                        
+                        {{ $image->description }}<br>
 
                         <!-- Likes y comentarios -->
                         <div class="pt-3 my-auto">                

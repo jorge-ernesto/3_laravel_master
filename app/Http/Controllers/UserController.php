@@ -39,7 +39,6 @@ class UserController extends Controller
         $usuarioActualizado->surname = $request->surname;
         $usuarioActualizado->nick    = $request->nick; 
         $usuarioActualizado->email   = $request->email; 
-
         /* Subimos imagen en base 64 */  
         $image  = $request->image;
         $base64 = $request->base64;
@@ -48,12 +47,12 @@ class UserController extends Controller
             
             /* Base 64 */
             $base_to_php = explode(',', $base64);
-            $data        = base64_decode($base_to_php[1]);            
+            $data        = base64_decode($base_to_php[1]);                        
             
             Storage::disk('disk_users')->put($image_path, $data);     //Guardar en la carpeta storage/app/users
             $usuarioActualizado->image = $image_path;                 //Seteo el nombre de la imagen en el objeto                        
         endif;
-
+        /* Fin Subimos imagen en base 64 */  
         $usuarioActualizado->update();    
         return redirect()->route('config.index')->with('mensaje', 'Usuario actualizado correctamente');
     }

@@ -30,13 +30,9 @@ class CommentController extends Controller
         $comentarioNuevo           = new App\Comment;
         $comentarioNuevo->user_id  = Auth::user()->id;
         $comentarioNuevo->image_id = $request->image_id;
-        $comentarioNuevo->content  = $request->content;
-        $comentarioNuevo->save();
-        
-        $dataComment = App\Comment::orderBy('id', 'DESC')
-                                    ->get();
-        $image = App\Image::findOrFail($request->image_id);
-        return view('image.show', compact('dataComment', 'image'));
+        $comentarioNuevo->content  = $request->content;    
+        $comentarioNuevo->save();                        
+        return redirect()->route('image.show', $request->image_id)->with('mensaje', 'Haz publicado tu comentario correctamente');
     }
     
     public function show($id){
