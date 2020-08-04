@@ -45,7 +45,7 @@ class ImageController extends Controller
             $image_path = time()."_".$image->getClientOriginalName();           //Poner nombre unico
             Storage::disk('disk_images')->put($image_path, \File::get($image)); //Guardar en la carpeta storage/app/users
             $imagenNueva->image = $image_path;                                  //Seteo el nombre de la imagen en el objeto
-        endif;              
+        endif;
 
         $imagenNueva->save();        
         return redirect()->route('image.index')->with('mensaje', 'Imagen subida correctamente');

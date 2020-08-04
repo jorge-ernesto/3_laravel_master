@@ -40,9 +40,9 @@ class UserController extends Controller
         $usuarioActualizado->nick    = $request->nick; 
         $usuarioActualizado->email   = $request->email; 
 
-        /* Subimos imagen */  
-        $image   = $request->image;
-        $base64  = $request->base64;
+        /* Subimos imagen en base 64 */  
+        $image  = $request->image;
+        $base64 = $request->base64;
         if($image):                                                  //Solo si hay imagen
             $image_path = time()."_".$image->getClientOriginalName(); //Poner nombre unico
             
