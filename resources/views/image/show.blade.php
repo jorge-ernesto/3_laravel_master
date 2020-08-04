@@ -76,9 +76,24 @@
                         @foreach($dataComment as $key=>$comment)
                             <div class="mb-2">
                                 <span class="text-muted">{{ ' @'.$comment->user->nick.' '.$FormatTime->LongTimeFilter($comment->created_at) }}</span><br>                                                                         
-                                {{ $comment->content }}                                    
+                                {{ $comment->content }}
+
+                                @if($comment->user->id == Auth::user()->id) <!-- Comprobar si es el dueño del comentario -->
+                                    <form method="POST" action="{{ route('comment.destroy', $comment->id) }}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-sm btn-warning float-right">Eliminar</button>     
+                                    </form>
+                                @elseif($image->user->id == Auth::user()->id) <!-- Comprobar si es el dueño de la publicacion -->
+                                    <form method="POST" action="{{ route('comment.destroy', $comment->id) }}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-sm btn-warning float-right">Eliminar</button>     
+                                    </form>
+                                @endif                                                              
                             </div>                                
                         @endforeach
+                        {{ $dataComment->links() }}
                     </div>
                 </div>                    
             </div>  

@@ -45,7 +45,8 @@ Route::get('/image/{image}'        , 'ImageController@show')    ->name('image.sh
 Route::get('/image/view/{filename}', 'ImageController@getImage')->name('image.view'); //Trae imagen
 
 //Commments
-Route::post('/comment', 'CommentController@store')->name('comment.store');
+Route::post('/comment'            , 'CommentController@store')  ->name('comment.store');
+Route::delete('/comment/{comment}', 'CommentController@destroy')->name('comment.destroy');
 
 /* Rutas de la autenticación */
 Auth::routes();

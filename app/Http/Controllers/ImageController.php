@@ -52,7 +52,7 @@ class ImageController extends Controller
 
     public function show($id){
         $dataComment = App\Comment::orderBy('id', 'DESC')
-                                    ->get();
+                                    ->paginate(20);
         $image = App\Image::findOrFail($id);
         return view('image.show', compact('dataComment', 'image'));
     }
