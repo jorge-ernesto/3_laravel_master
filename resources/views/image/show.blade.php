@@ -38,13 +38,15 @@
                             </svg>
                         </a>                           
                         
+                        @php print_r($dataComment) @endphp
+
                         <div class="pt-3">
                            <h2>Comentarios ({{ count($image->comments) }})</h2> 
                            <hr>
-                           <form method="POST" action="">                               
+                            <form method="POST" action="{{ route('comment.store') }}">
                                 @csrf
 
-                                <input type="hidden" name="image_id">
+                                <input type="hidden" name="image_id" value="{{ $image->id }}">
                                 
                                 <div class="form-group row">
                                     {{-- <label for="content" class="col-md-4 col-form-label text-md-right">Descripción</label> --}}

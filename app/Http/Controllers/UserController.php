@@ -20,9 +20,7 @@ class UserController extends Controller
         return view('user.config');
     }
 
-    public function update(Request $request){
-        $id = Auth::user()->id;                    
-
+    public function update(Request $request, $id){
         /* Obtenemos todo el request */
         // return $request->all();                
 
@@ -43,9 +41,9 @@ class UserController extends Controller
         $usuarioActualizado->email   = $request->email; 
 
         /* Subimos imagen */  
-        $image   = $request->file('image');
-        $base64  = $request->input('base64');      
-        if($image){                                                   //Solo si hay imagen
+        $image   = $request->image;
+        $base64  = $request->base64;
+        if($image):                                                  //Solo si hay imagen
             $image_path = time()."_".$image->getClientOriginalName(); //Poner nombre unico
             
             /* Base 64 */
@@ -54,7 +52,7 @@ class UserController extends Controller
             
             Storage::disk('disk_users')->put($image_path, $data);     //Guardar en la carpeta storage/app/users
             $usuarioActualizado->image = $image_path;                 //Seteo el nombre de la imagen en el objeto                        
-        }        
+        endif;
 
         $usuarioActualizado->update();    
         return redirect()->route('config.index')->with('mensaje', 'Usuario actualizado correctamente');

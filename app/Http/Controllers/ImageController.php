@@ -15,7 +15,7 @@ class ImageController extends Controller
     } 
 
     public function index(){
-        $dataImagen = \App\Image::orderBy('id', 'DESC')
+        $dataImagen = App\Image::orderBy('id', 'DESC')
                                 ->paginate(5);
         return view('image.index', compact('dataImagen'));
     }
@@ -24,9 +24,7 @@ class ImageController extends Controller
         return view('image.create');
     }
 
-    public function store(Request $request){
-        $user_id = Auth::user()->id;  
-
+    public function store(Request $request){        
         /* Obtenemos todo el request */
         // return $request->all();                               
 
@@ -38,24 +36,24 @@ class ImageController extends Controller
 
         /* Asignar nuevos valores al objeto de usuario */
         $imagenNueva              = new App\Image;
-        $imagenNueva->user_id     = $user_id;
+        $imagenNueva->user_id     = Auth::user()->id;
         $imagenNueva->description = $request->description;
-       
+
         /* Subimos imagen */
         $image = $request->image;      
-        if($image){                                                             //Solo si hay imagen
+        if($image):                                                             //Solo si hay imagen
             $image_path = time()."_".$image->getClientOriginalName();           //Poner nombre unico
             Storage::disk('disk_images')->put($image_path, \File::get($image)); //Guardar en la carpeta storage/app/users
             $imagenNueva->image = $image_path;                                  //Seteo el nombre de la imagen en el objeto
-        }                        
+        endif;              
 
         $imagenNueva->save();        
         return redirect()->route('image.index')->with('mensaje', 'Imagen subida correctamente');
     }    
 
-    public function detail($id){
+    public function show($id){
         $image = App\Image::findOrFail($id);
-        return view('image.detail', compact('image'));
+        return view('image.show', compact('image'));
     }
 
     /**
