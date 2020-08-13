@@ -33,7 +33,7 @@
                                 @endif
                             </div>
                         </div>
-
+                        
                         <div class="form-group row">
                             <label for="description" class="col-md-4 col-form-label text-md-right">Descripción</label>
 
@@ -65,4 +65,12 @@
 @endsection
 
 @section('scripts')
+<script>
+    $('.custom-file-input').on('change', function(event) {
+        var inputFile = event.currentTarget;
+        $(inputFile).parent()
+            .find('.custom-file-label')
+            .html(inputFile.files[0].name);
+    });       
+</script>
 @endsection

@@ -25,7 +25,8 @@ Route::get('/', function () {
     $auth = Auth::user();
 
     if( isset($auth) ){
-        return view('home');
+        //return view('home');
+        return redirect('/image');
     }else{
         return view('auth.login');
     }
