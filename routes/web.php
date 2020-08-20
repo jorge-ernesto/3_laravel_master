@@ -49,6 +49,10 @@ Route::get('/image/view/{filename}', 'ImageController@getImage')->name('image.vi
 Route::post('/comment'            , 'CommentController@store')  ->name('comment.store');
 Route::delete('/comment/{comment}', 'CommentController@destroy')->name('comment.destroy');
 
+//Likes
+Route::get('/like/like/{image_id}'   , 'LikeController@like')   ->name('like.like');
+Route::get('/like/dislike/{image_id}', 'LikeController@dislike')->name('like.dislike');
+
 /* Rutas de la autenticación */
 Auth::routes();
 
