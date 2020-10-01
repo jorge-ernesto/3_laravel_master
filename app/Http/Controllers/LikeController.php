@@ -16,32 +16,58 @@ class LikeController extends Controller
 
     public function like($image_id){        
         $user_id    = Auth::user()->id;        
-        $isset_like = DB::select("SELECT * FROM likes WHERE user_id = $user_id AND image_id = $image_id"); //Verifica si like existe
+        $isset_like = App\Like::where('image_id', '=', $image_id)
+                                ->where('user_id', '=', $user_id)
+                                ->first(); //LIMIT 1, first si no hay data no trae nada, get trae aunque no tenga data un array vacio [], tambien se pudo recurrir a un count() pero trae la cantidad
         // return $isset_like;
         // return response()->json([
         //     'message' => $isset_like
-        // ]);        
+        // ]);
         
-        if($isset_like){
-            return back()->with('mensaje', 'Ya le diste like');
+        if($isset_like){            
+            return response()->json([
+                'message' => 'Ya le diste like'
+            ]);   
         }else{
             $likeNuevo           = new App\Like;
             $likeNuevo->user_id  = $user_id; 
             $likeNuevo->image_id = $image_id;
             $likeNuevo->save();   
-            return back()->with('mensaje', 'Te gusta esta imagen!');
+                        
+            $cantidad_likes = App\Like::where('image_id', '=', $image_id)
+                                        ->count();
+            
+            return response()->json([
+                'like' => $likeNuevo,
+                'message' => 'Te gusta esta imagen',
+                'cantidad_likes' => $cantidad_likes
+            ]);
         }                        
     }
 
     public function dislike($image_id){
         $user_id    = Auth::user()->id;        
-        $isset_like = DB::select("SELECT * FROM likes WHERE user_id = $user_id AND image_id = $image_id"); //Verifica si like existe       
+        $isset_like = App\Like::where('image_id', '=', $image_id)
+                                ->where('user_id', '=', $user_id)
+                                ->first(); //LIMIT 1, first si no hay data no trae nada, get trae aunque no tenga data un array vacio [], tambien se pudo recurrir a un count() pero trae la cantidad
+        // return $isset_like;
+        // return response()->json([
+        //     'message' => $isset_like
+        // ]);
         
-        if($isset_like){
-            DB::delete("DELETE FROM likes WHERE user_id = $user_id AND image_id = $image_id");
-            return back()->with('mensaje', 'Like eliminado');
-        }else{
-            return back()->with('mensaje', 'Problema al eliminar like');
+        if(!$isset_like){            
+            return response()->json([
+                'message' => 'Problema al eliminar like'
+            ]);
+        }else{                                    
+            $isset_like->delete();
+            $cantidad_likes = App\Like::where('image_id', '=', $image_id)
+                                        ->count();
+            
+            return response()->json([
+                'message' => 'Like eliminado',
+                'cantidad_likes' => $cantidad_likes
+            ]);
         }
         
     }

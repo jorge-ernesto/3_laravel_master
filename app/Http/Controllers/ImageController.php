@@ -59,7 +59,7 @@ class ImageController extends Controller
     }
 
     /**
-     * Funcion para descargar imagenes
+     * Funcion para obtener imagenes
      */
     public function getImage($filename){       
         return Storage::disk('disk_images')->download($filename);

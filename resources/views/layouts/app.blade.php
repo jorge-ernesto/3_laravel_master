@@ -10,7 +10,7 @@
     <title>Instagram</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,8 +19,12 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
 
-    <!-- Personalizado -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Personalizado uwu -->    
+    <script src="https://kit.fontawesome.com/e7eefb2967.js" crossorigin="anonymous"></script> <!-- Font Awesome -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- Jquery -->
+    <script src="{{ asset('assets/js/main.js') }}" defer></script>    
+    <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">

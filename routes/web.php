@@ -62,7 +62,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/test', function(){
     /* Images */
     $dataImage  = App\Image::all();
-    $dataImage  = App\Image::paginate(10);
     $dataImage2 = DB::select('select * from images');
     $dataImage3 = DB::table('images')
                     ->get();
