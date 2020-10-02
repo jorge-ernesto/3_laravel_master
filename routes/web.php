@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-/* Ruta por defecto */
+//Ruta por defecto
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -32,57 +32,32 @@ Route::get('/', function () {
     }
 });
 
-/* Rutas */
-//User
-Route::get('/config'              , 'UserController@config')  ->name('config.index');
-Route::put('/config/{config}'     , 'UserController@update')  ->name('config.update');
-Route::get('/user/view/{filename}', 'UserController@getImage')->name('user.view'); //Trae imagen
+//RUTAS DE LA APLICACION
+    //Rutas de prueba
+    Route::get("/pruebas/image", "PruebasController@image");    
 
-//Image
-Route::get('/image'                , 'ImageController@index')   ->name('image.index');
-Route::get('/image/create'         , 'ImageController@create')  ->name('image.create');
-Route::post('/image'               , 'ImageController@store')   ->name('image.store');
-Route::get('/image/{image}'        , 'ImageController@show')    ->name('image.show');
-Route::get('/image/view/{filename}', 'ImageController@getImage')->name('image.view'); //Trae imagen
+    //Rutas de usuarios
+    Route::get('/config'                , 'UserController@config')  ->name('config.index');
+    Route::put('/user/{user}'           , 'UserController@update')  ->name('user.update');
+    Route::get('/user/avatar/{filename}', 'UserController@getImage')->name('user.avatar');
 
-//Commments
-Route::post('/comment'            , 'CommentController@store')  ->name('comment.store');
-Route::delete('/comment/{comment}', 'CommentController@destroy')->name('comment.destroy');
+    //Rutas de imagenes
+    Route::get('/image'                , 'ImageController@index')   ->name('image.index');
+    Route::get('/image/create'         , 'ImageController@create')  ->name('image.create');
+    Route::post('/image'               , 'ImageController@store')   ->name('image.store');
+    Route::get('/image/{image}'        , 'ImageController@show')    ->name('image.show');
+    Route::get('/image/view/{filename}', 'ImageController@getImage')->name('image.view');
 
-//Likes
-Route::get('/like/like/{image_id}'   , 'LikeController@like')   ->name('like.like');
-Route::get('/like/dislike/{image_id}', 'LikeController@dislike')->name('like.dislike');
+    //Rutas de comentarios
+    Route::post('/comment'            , 'CommentController@store')  ->name('comment.store');
+    Route::delete('/comment/{comment}', 'CommentController@destroy')->name('comment.destroy');
 
-/* Rutas de la autenticación */
-Auth::routes();
+    //Rutas de likes
+    Route::get('/like/like/{image_id}'   , 'LikeController@like')   ->name('like.like');
+    Route::get('/like/dislike/{image_id}', 'LikeController@dislike')->name('like.dislike');
 
-Route::get('/home', 'HomeController@index')->name('home');
+    //Rutas de autenticación
+    Auth::routes();
 
-/* Ruta para pruebas */
-Route::get('/test', function(){
-    /* Images */
-    $dataImage  = App\Image::all();
-    $dataImage2 = DB::select('select * from images');
-    $dataImage3 = DB::table('images')
-                    ->get();
-
-    foreach($dataImage as $key=>$image):        
-        echo "<h1>{$image->id}         </h1>";
-        echo "<p> {$image->user->name} {$image->user->surname}</p>";
-        echo "<p> {$image->image_path} </p>";
-        echo "<p> {$image->description}</p>";
-        echo "<p> {$image->created_at} </p>";
-        echo "<p> {$image->updated_at} </p>";
-
-        if(count($image->comments) >= 1):
-            foreach($image->comments as $key=>$comment):
-                echo "<h3>{$comment->content}          </h3>";
-                echo "<p> {$comment->created_at}       </p>";
-                echo "<p> {$comment->user->name}       </p>";
-                echo "<p> {$comment->image->image_path}</p>";
-            endforeach;
-        endif;
-        echo "<hr>";
-    endforeach;
-    /* Fin Images */
-});
+    Route::get('/home', 'HomeController@index')->name('home');
+    

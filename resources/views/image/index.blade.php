@@ -16,7 +16,7 @@
                     <div class="card-header">
                         @if ($image->user->image) <!-- Valida que imagen del usuario exista -->
                             <a href="#" class="mr-2">
-                                <img class="rounded-circle" src="{{ route('user.view', $image->user->image) }}" alt="" width="30px">
+                                <img class="rounded-circle" src="{{ route('user.avatar', $image->user->image) }}" alt="" width="30px">
                             </a>
                             {{ $image->user->name.' '.$image->user->surname }} <span class="text-muted">{{ ' @'.$image->user->nick }}</span>
                         @endif
@@ -68,7 +68,7 @@
         <div class="col-md-3"> <!-- Barra derecha -->
             @if(Auth::user()->image)   
                 <a href="#" class="mr-2">
-                    <img class="rounded-circle" src="{{ route('user.view', Auth::user()->image) }}" alt="" width="50px">
+                    <img class="rounded-circle" src="{{ route('user.avatar', Auth::user()->image) }}" alt="" width="50px">
                 </a>
                 {{Auth::user()->name.' '.Auth::user()->surname}} <span class="text-muted">{{' @'.Auth::user()->nick}}</span>
             @endif

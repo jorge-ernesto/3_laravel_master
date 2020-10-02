@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="card-header">Configuración de mi cuenta</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('config.update', Auth::user()->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('user.update', Auth::user()->id) }}" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf                        
 
@@ -21,7 +21,7 @@
 
                             <div class="col-md-6">  
                                 @if(Auth::user()->image)    
-                                    <img src="{{ route('user.view', Auth::user()->image) }}" alt="" class="rounded-circle" width="120px">
+                                    <img src="{{ route('user.avatar', Auth::user()->image) }}" alt="" class="rounded-circle" width="120px">
                                 @endif                                                            
                             </div>
                         </div>
