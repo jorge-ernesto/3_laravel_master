@@ -26,11 +26,11 @@
                                 </div>
 
                                 {{-- Esto no funciona con la clase 'invalid-feedback' por el tipo nuevo de custom file input, se puede arreglar usando estilos css --}}
-                                @if( $errors->has('image') )
+                                @error('image')
                                     <span style="width: 100%; margin-top: 0.25rem; font-size: 80%; color: #e3342f;" role="alert">
-                                        <strong>{{ $errors->first('image') }}</strong>
+                                        <strong>{{ $message }}</strong>
                                     </span>
-                                @endif
+                                @enderror
                             </div>
                         </div>
                         
@@ -40,11 +40,11 @@
                             <div class="col-md-6">
                                 <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" value="" required autocomplete="description" autofocus rows="3"></textarea>
 
-                                @if( $errors->has('description') )
+                                @error('description')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('description') }}</strong>
+                                        <strong>{{ $message }}</strong>
                                     </span>
-                                @endif
+                                @enderror
                             </div>
                         </div>
 

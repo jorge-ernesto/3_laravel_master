@@ -9,13 +9,14 @@ use Illuminate\Support\Facades\DB;
 
 class PruebasController extends Controller
 {
-    public function image(Request $request){
+    public function image(Request $request)
+    {
         $dataImage  = App\Image::all();
         $dataImage2 = DB::select('select * from images');
         $dataImage3 = DB::table('images')
                         ->get();
 
-        foreach($dataImage as $key=>$image):        
+        foreach($dataImage as $key=>$image){    
             echo "<h1>{$image->id}         </h1>";
             echo "<p> {$image->user->name} {$image->user->surname}</p>";
             echo "<p> {$image->image_path} </p>";
@@ -32,6 +33,6 @@ class PruebasController extends Controller
                 endforeach;
             endif;
             echo "<hr>";
-        endforeach;
+        }
     }    
 }

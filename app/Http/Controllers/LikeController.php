@@ -10,19 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
-    public function like($image_id){        
+    public function like($image_id)
+    {        
         $user_id    = Auth::user()->id;        
         $isset_like = App\Like::where('image_id', '=', $image_id)
                                 ->where('user_id', '=', $user_id)
                                 ->first(); //LIMIT 1, first si no hay data no trae nada, get trae aunque no tenga data un array vacio [], tambien se pudo recurrir a un count() pero trae la cantidad
-        // return $isset_like;
-        // return response()->json([
-        //     'message' => $isset_like
-        // ]);
+        //error_log(json_encode($isset_like));
         
         if($isset_like){            
             return response()->json([
@@ -45,15 +44,13 @@ class LikeController extends Controller
         }                        
     }
 
-    public function dislike($image_id){
+    public function dislike($image_id)
+    {
         $user_id    = Auth::user()->id;        
         $isset_like = App\Like::where('image_id', '=', $image_id)
                                 ->where('user_id', '=', $user_id)
                                 ->first(); //LIMIT 1, first si no hay data no trae nada, get trae aunque no tenga data un array vacio [], tambien se pudo recurrir a un count() pero trae la cantidad
-        // return $isset_like;
-        // return response()->json([
-        //     'message' => $isset_like
-        // ]);
+        //error_log(json_encode($isset_like));
         
         if(!$isset_like){            
             return response()->json([
