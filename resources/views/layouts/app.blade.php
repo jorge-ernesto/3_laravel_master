@@ -23,7 +23,7 @@
     <script src="https://kit.fontawesome.com/e7eefb2967.js" crossorigin="anonymous"></script> <!-- Font Awesome -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- Jquery -->
     <script src="{{ asset('assets/js/main.js') }}" defer></script>    
-    <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
     
 </head>
 <body>
