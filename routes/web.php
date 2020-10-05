@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     $auth = Auth::user();
 
-    if( isset($auth) ){
+    if(!empty($auth)){
         //return view('home');
         return redirect('/image');
     }else{
