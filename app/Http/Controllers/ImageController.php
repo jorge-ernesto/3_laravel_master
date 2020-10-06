@@ -32,7 +32,7 @@ class ImageController extends Controller
         //return $request->all();                               
 
         /* Validamos datos */
-        $validate = $this->validate($request, [
+        $request->validate([
             'image'       => 'required|mimes:jpg,jpeg,png,gif',
             'description' => 'required|string|max:255'
         ]);        

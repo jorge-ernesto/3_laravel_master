@@ -25,7 +25,7 @@ class UserController extends Controller
         // return $request->all();                
 
         /* Validamos datos */        
-        $validate = $this->validate($request, [
+        $request->validate([
             'name'    => "required|string|max:255",
             'surname' => "required|string|max:255",
             'nick'    => "required|string|max:255|unique:users,nick,".$id,        //El nick sera unico, pero puede haber una excepción que el nick coincide con el nick del id actual

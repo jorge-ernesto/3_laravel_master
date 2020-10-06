@@ -25,7 +25,7 @@ class CommentController extends Controller
         // return $request->all();                               
 
         /* Validamos datos */
-        $validate = $this->validate($request, [
+        $request->validate([
             'content' => 'required|string|max:255'
         ]);      
         
