@@ -111,11 +111,13 @@
                         </div>
 
                         <!-- Previa del recorte -->
-                        <canvas class="d-none" id="preview"></canvas>
+                        <canvas id="preview" class="d-none"></canvas>
                     
                         <!-- Muestra de la imagen recortada en Base64 -->
-                        <code class="d-none" id="base64"></code>
-                        <input type="text" class="d-none" id="base64_image" name="base64">
+                        <code id="base64" class="d-none"></code>
+
+                        <!-- Muestra de la imagen recortada en Base64 en un input con name para enviar por POST -->
+                        <input id="base64_image" type="text" class="d-none" name="base64">
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
